@@ -62,6 +62,22 @@
             MainViewModel main = MainViewModel.GetInstance();
             main.ListContacts = (List<Contacts>)response.Result;
 
+            this.Contacts= new ObservableCollection<Contacts>(ToContactsCollect());
+        }
+
+        private IEnumerable<Contacts> ToContactsCollect()
+        {
+            ObservableCollection<Contacts> collection = new ObservableCollection<Contacts>();
+            MainViewModel main = MainViewModel.GetInstance();
+            foreach (var lista in main.ListContacts)
+            {
+                Contacts contacts = new Contacts();
+                contacts.ID = lista.ID;
+                contacts.Name = lista.Name;
+                contacts.Phone = lista.Phone;
+                contacts.Bussines = lista.Bussines;
+            }
+            return (collection);
         }
 
         #endregion
